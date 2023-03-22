@@ -1,0 +1,3 @@
+# ignore all gateways configs
+thingsix-forwarder/etc/thingsix-forwarder/unknown_gateways.yaml
+thingsix-forwarder/etc/thingsix-forwarder/gateways.yaml

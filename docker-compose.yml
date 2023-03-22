@@ -1,0 +1,76 @@
+version: "3.9"
+services:
+  thingsix-forwarder:
+    container_name: thingsix-forwarder
+    image: ghcr.io/thingsixfoundation/packet-handling/forwarder:${VERSION}
+    networks:
+      - thingsix
+    env_file:
+      - ./.env_files/common.env
+      - ./.env_files/thingsix-forwarder.env
+    ports:
+      - "1680:1680/udp"
+      - "127.0.0.1:8080:8080"
+      - "127.0.0.1:8888:8888"
+    volumes:
+      - ./thingsix-forwarder/etc/thingsix-forwarder:/etc/thingsix-forwarder
+    command: "--net=${NETWORK}"
+    logging:
+      options:
+        max-size: "1024k"
+        max-file: "7"
+    restart: unless-stopped
+  prometheus:
+    container_name: prometheus
+    image: prom/prometheus:v2.42.0
+    networks:
+      - thingsix
+    volumes:
+      - prometheus-volume:/prometheus
+      - ./prometheus/:/etc/prometheus/
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--storage.tsdb.retention.time=30d'
+      - '--web.enable-lifecycle'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+    logging:
+      options:
+        max-size: "1024k"
+        max-file: "7"
+    ports:
+      - "9090:9090"
+    restart: always
+
+  grafana:
+    image: grafana/grafana:9.4.7
+    container_name: grafana
+    networks:
+      - thingsix
+    env_file:
+      - ./.env_files/common.env
+      - ./.env_files/grafana.env
+    volumes:
+      - grafana-volume:/var/lib/grafana
+      - ./grafana/config.ini:/etc/grafana/config.ini
+      - ./grafana/provisioning:/etc/grafana/provisioning
+      - ./grafana/dashboards:/var/lib/grafana/dashboards
+    logging:
+      options:
+        max-size: "1024k"
+        max-file: "7"
+    ports:
+      - "127.0.0.1:3000:3000"
+    restart: always
+
+networks:
+  thingsix:
+    name: thingsix
+
+volumes:
+  prometheus-volume:
+    name: prometheus-volume
+  grafana-volume:
+    name: grafana-volume
+
