@@ -62,7 +62,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": ""
       },
       "fieldConfig": {
         "defaults": {
@@ -139,7 +139,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": ""
           },
           "editorMode": "builder",
           "expr": "backend_semtechudp_gateway_connect_count{job=\"thingsix-forwarder\"}",
@@ -150,7 +150,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": ""
           },
           "editorMode": "builder",
           "expr": "backend_semtechudp_gateway_diconnect_count{job=\"thingsix-forwarder\"}",
@@ -166,7 +166,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": ""
       },
       "description": "",
       "fieldConfig": {
@@ -244,7 +244,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": ""
           },
           "editorMode": "builder",
           "expr": "router_online{job=\"thingsix-forwarder\"}",
@@ -255,7 +255,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": ""
           },
           "editorMode": "builder",
           "expr": "router_offline{job=\"thingsix-forwarder\"}",
@@ -283,7 +283,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Thingsix Forwarder Stats",
+  "title": "ThingsIX Forwarder Stats",
   "uid": "QxDeSNf4k",
   "version": 1,
   "weekStart": ""

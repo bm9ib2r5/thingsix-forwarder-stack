@@ -55,7 +55,6 @@ services:
       - grafana-volume:/var/lib/grafana
       - ./grafana/config.ini:/etc/grafana/config.ini
       - ./grafana/provisioning:/etc/grafana/provisioning
-      - ./grafana/dashboards:/var/lib/grafana/dashboards
     logging:
       options:
         max-size: "1024k"
